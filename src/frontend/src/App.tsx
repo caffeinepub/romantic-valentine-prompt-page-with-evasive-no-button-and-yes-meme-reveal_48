@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Heart } from 'lucide-react';
 
+type ViewState = 'prompt' | 'meme' | 'title';
+
 export default function App() {
-  const [showResult, setShowResult] = useState(false);
+  const [currentView, setCurrentView] = useState<ViewState>('prompt');
   const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 });
   const [isNoButtonPositioned, setIsNoButtonPositioned] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -65,20 +67,53 @@ export default function App() {
   };
 
   const handleYesClick = () => {
-    setShowResult(true);
+    setCurrentView('meme');
   };
 
-  if (showResult) {
+  const handleContinueToTitle = () => {
+    setCurrentView('title');
+  };
+
+  // Shared background wrapper
+  const BackgroundWrapper = ({ children }: { children: React.ReactNode }) => (
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-pink-50 via-white to-rose-50">
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: 'url(/assets/generated/hearts-pattern-bg.dim_1920x1080.png)',
+          backgroundSize: '400px',
+          backgroundRepeat: 'repeat'
+        }}
+      />
+      {children}
+    </div>
+  );
+
+  // Title screen view
+  if (currentView === 'title') {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-pink-50 via-white to-rose-50">
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: 'url(/assets/generated/hearts-pattern-bg.dim_1920x1080.png)',
-            backgroundSize: '400px',
-            backgroundRepeat: 'repeat'
-          }}
-        />
+      <BackgroundWrapper>
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-4">
+          <div className="mb-8 animate-bounce">
+            <Heart className="w-16 h-16 mx-auto text-rose-500 fill-rose-500" />
+          </div>
+          <h1 className="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-8 leading-tight">
+            NABIHA SHINWARI LOVE YOU
+          </h1>
+          <div className="flex justify-center gap-2 mt-12">
+            <Heart className="w-8 h-8 text-rose-500 fill-rose-500 animate-pulse" />
+            <Heart className="w-8 h-8 text-pink-400 fill-pink-400 animate-pulse delay-100" />
+            <Heart className="w-8 h-8 text-rose-500 fill-rose-500 animate-pulse delay-200" />
+          </div>
+        </div>
+      </BackgroundWrapper>
+    );
+  }
+
+  // Meme screen view
+  if (currentView === 'meme') {
+    return (
+      <BackgroundWrapper>
         <div className="relative z-10 text-center max-w-2xl mx-auto">
           <div className="mb-8 animate-bounce">
             <Heart className="w-16 h-16 mx-auto text-rose-500 fill-rose-500" />
@@ -91,25 +126,24 @@ export default function App() {
           <h2 className="text-4xl md:text-5xl font-bold text-rose-600 mb-4">
             Perfect! 💕
           </h2>
-          <p className="text-xl text-rose-400">
+          <p className="text-xl text-rose-400 mb-8">
             I knew you'd make the right choice!
           </p>
+          <Button
+            onClick={handleContinueToTitle}
+            size="lg"
+            className="bg-rose-500 hover:bg-rose-600 text-white text-xl px-10 py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-bold"
+          >
+            Continue 💖
+          </Button>
         </div>
-      </div>
+      </BackgroundWrapper>
     );
   }
 
+  // Prompt screen view (default)
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-pink-50 via-white to-rose-50">
-      <div 
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: 'url(/assets/generated/hearts-pattern-bg.dim_1920x1080.png)',
-          backgroundSize: '400px',
-          backgroundRepeat: 'repeat'
-        }}
-      />
-      
+    <BackgroundWrapper>
       <div className="relative z-10 w-full max-w-2xl">
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border-4 border-rose-200">
           <div className="text-center mb-12">
@@ -180,6 +214,6 @@ export default function App() {
           <p className="mt-1">© {new Date().getFullYear()}</p>
         </footer>
       </div>
-    </div>
+    </BackgroundWrapper>
   );
 }

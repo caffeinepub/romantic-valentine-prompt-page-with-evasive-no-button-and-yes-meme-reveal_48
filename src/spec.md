@@ -1,13 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Build a single-page Valentine surprise prompt that asks “Will you be my Valentine?”, uses an evasive “No” button, and reveals a “Good choice” meme image after clicking “Yes”, all in a pink/white romantic theme.
+**Goal:** After clicking “Yes! 💕”, let the user proceed through a meme screen to a distinct second screen that prominently displays the exact title text “NABIHA SHINWARI LOVE YOU” in a stylish, big-screen-friendly design.
 
 **Planned changes:**
-- Create a single-page UI with the question text and exactly two visible controls: “Yes” and “No”.
-- Implement an evasive “No” button that moves away on desktop pointer approach and on touch press/tap attempts (iPad), staying within the viewport and avoiding overlap with the question and “Yes”.
-- On “Yes” click/tap, transition the view to display a static meme image containing the exact text “Good choice”.
-- Apply a consistent romantic pink/white visual theme with simple charming styling (rounded corners, gentle spacing/shadows).
-- Add required generated images as static assets under `frontend/public/assets/generated` and reference them via static paths (no backend fetch).
+- Update the post-“Yes! 💕” flow to include a distinct second screen/view within the same React app.
+- Keep the existing meme screen after “Yes! 💕”, and add a clear “Next”/“Continue” control to navigate from the meme screen to the title screen.
+- Add a title screen that renders the exact text “NABIHA SHINWARI LOVE YOU” with large, high-contrast, decorative-but-readable “stylish alphabet” typography and responsive centering.
+- Ensure the romantic theme and hearts background pattern remain consistent across the prompt screen, meme screen, and title screen, with all other UI text staying in English.
 
-**User-visible outcome:** On iPad Chrome or desktop, the user sees a Valentine question with “Yes” and a playful “No” that dodges interaction; selecting “Yes” shows a “Good choice” meme image.
+**User-visible outcome:** Clicking “Yes! 💕” shows the meme screen with an obvious way to continue, and then navigates to a second screen that displays “NABIHA SHINWARI LOVE YOU” prominently in a stylish, responsive hero title.

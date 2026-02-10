@@ -1,15 +1,15 @@
 {
-  "backend/main.mo": "Empty Motoko actor with no exposed methods.",
-  "feature_evidence.json": "Feature evidence report mapping Valentine UI requirements to relevant frontend files and components.",
-  "frontend-file-summaries.txt": "Human-written summaries describing key frontend files and their purposes in the Valentine UI.",
-  "frontend/index.css": "Tailwind base styles defining color variables and theming for the project.",
-  "frontend/index.html": "HTML entry point setting up the root element and loading the React app.",
-  "frontend/src/App.tsx": "Main UI with Yes/No prompt, evasive No button logic, and meme reveal on Yes.",
-  "frontend/src/hooks/useActor.ts": "Hook that creates and manages a backend actor instance tied to user identity.",
-  "frontend/src/hooks/useInternetIdentity.ts": "Context and provider handling Internet Identity authentication and state.",
-  "frontend/src/hooks/useQueries.ts": "Empty placeholder hook since no backend queries are required.",
-  "frontend/src/index.css": "Global Tailwind styles with a pink-themed palette, fonts, and animations.",
-  "frontend/src/main.tsx": "React entry file wiring providers and rendering the App component.",
-  "frontend/tailwind.config.js": "Tailwind configuration that sets dark mode, content paths, extended theme colors, fonts, animations, and includes typography, container queries, and animation plugins.",
-  "project_state.json": "Project metadata describing a romantic Valentine web page, its features, required images, and pending feature requests."
+  "backend/main.mo": "Empty Motoko actor with no backend logic.",
+  "feature_evidence.json": "Feature evidence report listing three UI features, affected frontend files, and related components.",
+  "frontend-file-summaries.txt": "Prewritten summaries describing frontend files, styles, Tailwind config, and empty hooks.",
+  "frontend/index.css": "Tailwind base theme variables and global styles defining a color system and dark mode.",
+  "frontend/index.html": "Basic HTML document mounting the React app via main.tsx.",
+  "frontend/src/App.tsx": "React app implementing three-view flow (prompt, meme, title) with moving No button and styled final title screen.",
+  "frontend/src/hooks/useActor.ts": "Hook creating a backend actor tied to Internet Identity and refreshing dependent queries on identity change.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Context and provider for managing Internet Identity authentication and exposing login state.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file indicating no backend queries are used.",
+  "frontend/src/index.css": "Tailwind-based global styles including pink-themed OKLCH palette, typography, animations, and hero title gradient effects.",
+  "frontend/src/main.tsx": "Entry point rendering App with React Query and Internet Identity providers.",
+  "frontend/tailwind.config.js": "Tailwind CSS configuration enabling dark mode, custom fonts, OKLCH-based color system, extended radius and shadows, and accordion animations with several plugins.",
+  "project_state.json": "Project metadata describing a web app's Yes/No flow, existing features, pending requests, and the requirement to display a large stylish title on a second screen."
 }

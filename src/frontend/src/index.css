@@ -107,3 +107,42 @@
 .animate-bounce {
     animation: bounce 1s ease-in-out infinite;
 }
+
+/* Hero title styling with gradient and glow effect */
+.hero-title {
+    background: linear-gradient(135deg, 
+        oklch(0.65 0.25 350) 0%, 
+        oklch(0.55 0.22 340) 25%,
+        oklch(0.70 0.20 355) 50%,
+        oklch(0.60 0.23 345) 75%,
+        oklch(0.65 0.25 350) 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.02em;
+    text-shadow: 
+        0 0 40px rgba(244, 63, 94, 0.3),
+        0 0 80px rgba(244, 63, 94, 0.2);
+    animation: gradient-shift 4s ease infinite;
+    filter: drop-shadow(0 4px 20px rgba(244, 63, 94, 0.4));
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Ensure text remains readable on mobile */
+@media (max-width: 640px) {
+    .hero-title {
+        letter-spacing: 0.01em;
+        word-break: break-word;
+        hyphens: auto;
+    }
+}
