@@ -1,0 +1,6 @@
+{
+  "frontend/src/App.tsx": "Main Valentine's Day page component with evasive \"No\" button logic, \"Yes\" button that reveals a meme, and romantic pink/white themed UI with heart animations and background pattern.",
+  "frontend/src/index.css": "Global styles with romantic pink-themed OKLCH color system, custom animations for hearts and bounce effects, and Playfair Display serif font for headings.",
+  "frontend/tailwind.config.js": "Tailwind configuration with romantic pink color palette, Playfair Display and Inter fonts, increased border radius values, and custom shadow effects.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as no backend queries are needed for this client-side only application."
+}

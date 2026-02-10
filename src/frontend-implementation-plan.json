@@ -1,0 +1,107 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Valentine prompt single-page with evasive No and Good choice meme reveal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build a single-page Valentine prompt UI asking “Will you be my Valentine?” with exactly two choices: Yes and No.",
+      "acceptanceCriteria": [
+        "The page displays the question \"Will you be my Valentine?\" in English.",
+        "There are exactly two visible choice controls labeled \"Yes\" and \"No\".",
+        "The UI is fully usable on iPad Chrome in both portrait and landscape orientations."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the single-page Valentine prompt view with the question text and exactly two visible controls (\"Yes\" and \"No\"), ensuring responsive layout for iPad Chrome portrait/landscape. Use the shadcn-ui Button component to provide consistent, accessible buttons (verify the component's usage instructions before implementing)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Make the No button evasive on both desktop and touch devices so it moves away before it can be clicked/tapped, staying visible and not overlapping key UI.",
+      "acceptanceCriteria": [
+        "On desktop: when the pointer moves over/near the \"No\" button, the button repositions so it cannot be clicked.",
+        "On touch devices (iPad): attempting to tap/press the \"No\" button causes it to move away before a click/tap is registered.",
+        "The \"No\" button remains within the visible viewport and does not overlap the \"Yes\" button or the main question text."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useEvasiveNoButton.ts",
+          "operation": "create",
+          "description": "Implement a reusable hook that computes and updates an evasive position for the \"No\" button using pointer events (e.g., onPointerEnter/onPointerMove/onPointerDown and touch equivalents), constraining movement within a defined container and avoiding overlap with the \"Yes\" button and question region."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the evasive behavior into the \"No\" button: render it with position controlled by useEvasiveNoButton, attach desktop and iPad-friendly interaction handlers that trigger repositioning before a click is registered, and ensure it stays within the visible prompt container without overlapping the question text or \"Yes\" button."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "On Yes click/tap, transition to a meme image view that visibly contains the exact text “Good choice”.",
+      "acceptanceCriteria": [
+        "Clicking/tapping \"Yes\" reliably switches the view from the question/buttons to the meme image.",
+        "The meme image contains the exact text \"Good choice\" visibly in the image.",
+        "The \"Yes\" interaction works on iPad Chrome (touch) and desktop browsers (mouse/keyboard)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add UI state to switch from the prompt view to a result view when \"Yes\" is activated (mouse, touch, and keyboard activation), and render the static image at frontend/public/assets/generated/good-choice-meme.dim_800x600.png with appropriate sizing for iPad and desktop."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Apply a romantic pink-and-white theme with a simple, charming layout and soft styling while keeping the experience self-contained.",
+      "acceptanceCriteria": [
+        "Primary palette is pink and white (with optional subtle neutral accents).",
+        "Typography and spacing feel intentionally romantic (e.g., soft shapes, gentle shadows, rounded corners) while keeping the page simple.",
+        "No unrelated pages, navigation, or extra features are introduced beyond the Valentine prompt flow."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global styles (including Tailwind base/components/utilities if used by the template) and define a pink/white romantic theme via CSS variables and base element styling; set a soft background treatment compatible with the heart pattern asset and ensure mobile/iPad-friendly spacing and typography."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Apply the romantic layout styling (rounded card, gentle shadows, pink/white palette) and use the subtle repeating heart pattern background from frontend/public/assets/generated/hearts-pattern-bg.dim_1920x1080.png as a page/container background, keeping the app as a single self-contained page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add required generated images as static frontend assets and render them directly without any backend fetching.",
+      "acceptanceCriteria": [
+        "Generated images are placed under frontend/public/assets/generated with the exact filenames specified in imageRequirements.required.",
+        "The frontend references these images via static paths and they render correctly in production build.",
+        "No backend endpoints or canister calls are used to serve images."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/good-choice-meme.dim_800x600.png",
+          "operation": "create",
+          "description": "Add the generated static meme image asset with the exact filename and dimensions suffix so the frontend can render it directly (no backend involvement)."
+        },
+        {
+          "path": "frontend/public/assets/generated/hearts-pattern-bg.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated subtle heart pattern background asset with the exact filename and dimensions suffix so the frontend can reference it as a static background (no backend involvement)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the UI references the generated images via static paths using frontend/public/assets/generated/good-choice-meme.dim_800x600.png and frontend/public/assets/generated/hearts-pattern-bg.dim_1920x1080.png, without introducing any backend/canister calls."
+        }
+      ]
+    }
+  ]
+}

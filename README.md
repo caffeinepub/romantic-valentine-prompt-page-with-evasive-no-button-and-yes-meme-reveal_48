@@ -1,2 +1,3 @@
-# romantic-valentine-prompt-page-with-evasive-no-button-and-yes-meme-reveal_48
-Exported from Caffeine project: Romantic Valentine prompt page with evasive No button and Yes meme reveal
+## Romantic Valentine prompt page with evasive No button and Yes meme reveal
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
